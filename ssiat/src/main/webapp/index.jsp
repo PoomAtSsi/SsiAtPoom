@@ -9,11 +9,20 @@
 <title>welcome! sample</title>
 </head>
 <body>
-	<!-- <h1>Sample Spring Project</h1>
-	<a href="start.do">start</a> -->
-	<jsp:forward page="homeStart.do"></jsp:forward>
-	<%-- start.do --%>
+	<%-- <jsp:forward page="homeStart.do"></jsp:forward> --%>
+	<jsp:include  page="homeStart.do" /> 
+
 	
-	<a href= "firstInterceptor.do" >인터셉터</a>
+	<hr>
+	<!-- <a href="notice/nList.do" type="button">공지사항</a> -->
+	<button type="button" onclick="location.href='notice/nList.do'">공지사항</button>
+	
+	<hr>
+	<button type="button" onclick="location.href='notice/testMapArgumentResolver.do'">notice/testMapArgumentResolver.do</button>
+	
+	<hr>
+	<button type="button" onclick="location.href='itcp/firstInterceptor.do'">인터셉터</button>
+	
+	
 </body>
 </html>

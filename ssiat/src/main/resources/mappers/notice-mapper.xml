@@ -6,19 +6,37 @@
 
 	<resultMap id="noticeResult" type="notice">
 		<id property="NOTICE_NO" column="NOTICE_NO" />
+		<result property="NOTICE_NICKNAME" column="NOTICE_NICKNAME" />
 		<result property="NOTICE_TITLE" column="NOTICE_TITLE" />
-		<result property="NOTICE_WRITER" column="NOTICE_WRITER" />
+		<result property="NOTICE_CONTENTS" column="NOTICE_CONTENTS" />
+		<result property="NOTICE_FILE" column="NOTICE_FILE" />
 		<result property="NOTICE_DATE" column="NOTICE_DATE" />
-		<result property="NOTICE_CONTENT" column="NOTICE_CONTENT" />
-		<result property="NOTICE_VIEWS" column="NOTICE_VIEWS" />
 	</resultMap>
 	
-	<select id="noticeInsert" resultMap="noticeResult">
-		SELECT * FROM NOTICE2
+	<select id="noticeList" resultMap="noticeResult">
+		SELECT * FROM NOTICE
+	</select>
+	<select id="noticeInsert2" parameterType="hashmap" resultMap="noticeResult">
+		SELECT * FROM NOTICE
 	</select>
 	
+	
+	<insert id="noticeInsert" parameterType="notice">
+		 <![CDATA[
+		insert into NOTICE values (
+			test_seq.nextval, 
+			NOTICE_NICKNAME = #{NOTICE_NICKNAME}, 
+			NOTICE_TITLE = #{NOTICE_TITLE}, 
+			NOTICE_CONTENTS = NOTICE_CONTENTS, 
+			NOTICE_FILE = #{NOTICE_FILE}, 
+			NOTICE_DATE = sysdate
+			);
+		]]>
+	</insert>
+	
+	
 	<select id="noticeDetail" resultMap="noticeResult" parameterType="int" >
-		SELECT * FROM NOTICE2 where NOTICE_NO = #{notice_no}
+		SELECT * FROM NOTICE where NOTICE_NO = #{notice_no}
 	</select>
 	
 	<!-- <select id="noticeUpdateViewsCnt" parameterType="hashmap" resultType="hashmap">

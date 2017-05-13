@@ -1,6 +1,7 @@
 package org.poom.sap.board.model.service;
 
 import org.poom.sap.board.model.vo.Board;
+import org.apache.log4j.Logger;
 import org.poom.sap.board.model.dao.BoardDao;
 
 import java.util.ArrayList;
@@ -13,6 +14,7 @@ import org.springframework.stereotype.Service;
 
 @Service("BoardService")
 public class BoardServiceImpl implements BoardService{
+	Logger log = Logger.getLogger(this.getClass());
 	
 	@Autowired
 	BoardDao boardDao;

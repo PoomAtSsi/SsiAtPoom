@@ -7,7 +7,7 @@
 <head>
 <meta charset="UTF-8">
 <title>공지글 목록보기</title>
-<script type="text/javascript" src="/sample/js/jquery-1.12.0.min.js"></script>
+	<script type="text/javascript" src="/sample/js/jquery-1.12.0.min.js"></script>
 <script type="text/javascript">
 	$(function(){
 		$("#stitleView").hide();
@@ -79,21 +79,28 @@
 
 <br>
 <table align="center" width="700" border="1" cellspacing="0">
-	<tr><th>번호</th><th width="300">공지제목</th><th>작성자</th><th>작성날짜</th><th>조회수</th></tr>
-	<%-- <% for(Notice n : list){ %> --%>
-	<c:forEach items="${nlist }" var="n">
 	<tr>
-		<td><%-- <%= n.getNoticeNo() %> --%> ${ n.NOTICE_NO }</td>
+		<th>번호</th>
+		<th>작성자</th>
+		<th width="300">공지제목</th>
+		<th width="300">내용</th>
+		<th width="100">첨부파일</th>
+		<th width="200">작성날짜</th>
+	</tr>
+	
+	<c:forEach items="${ nlist }" var="n">
+	<tr>
+		<td>${ n.NOTICE_NO }</td>
 		<c:url var="ndetail" value="nDetail.do"><!--  상대경로만 사용가능 -->
 			<c:param name="notice_no" value="${ n.NOTICE_NO }" />
 		</c:url>
+		<td>${ n.NOTICE_NICKNAME }</td>
 		<td><a href="${ ndetail }">
-		<%-- <%= n.getNoticeTitle() %> --%> ${ n.NOTICE_TITLE }</a></td>
-		<td><%-- <%= n.getNoticeWriter() %> --%> ${ n.NOTICE_WRITER }</td>
-		<td><%-- <%= n.getNoticeDate() %> --%> ${ n.NOTICE_DATE }</td>
- 		<td> ${ n.NOTICE_VIEWS }</td>
+		${ n.NOTICE_TITLE }</a></td>
+		<td><${ n.NOTICE_CONTENTS }</td>
+		<td><${ n.NOTICE_FILE }</td>
+ 		<td> ${ n.NOTICE_DATE }</td>
 	</tr>
-	<%-- <% } %> --%>
 	</c:forEach>
 </table>
 </body>

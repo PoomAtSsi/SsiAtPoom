@@ -14,26 +14,17 @@
 	<c:if test="${empty loginUser }">
 		<P>The time on the server is ${serverTime}.</P>
 		<form action="member/login.do" method="post">
-			<!-- <label>아이디 : <input type="text" name="userid"></label><br>
-				<label>암호 : <input type="password" name="userpwd"></label> -->
-			<label>아이디 : <input type="text" name="userid"></label><br>
-			<label>암호 : <input type="password" name="userpwd"></label><br>
+			<label>email : <input type="text" name="email"></label><br>
+			<label>password : <input type="password" name="password"></label><br>
 			<input type="submit" value="로그인">
 		</form>
 	</c:if>
+	
+	
 	<c:if test="${!empty loginUser }">
-		${loginUser.username } 님 <a href="logout.do">로그아웃</a>
-		
-		<hr>
-		
+		${loginUser.username } 님 <a href="member/logout.do">로그아웃</a>
 	</c:if>
-	
-	<a href="notice/nInsert.do">공지사항</a>
-	
-	<a href="#" onclick="location.href='notice/nInsert.do'">공지사항  location.href</a>
-	
-	
-	<h1><a href= "interceptor1/firstInterceptor.do" >인터셉터</a></h1>
+
 	
 </body>
 </html>

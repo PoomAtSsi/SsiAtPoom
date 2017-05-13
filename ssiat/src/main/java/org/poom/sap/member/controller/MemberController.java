@@ -3,6 +3,7 @@ package org.poom.sap.member.controller;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.apache.log4j.Logger;
 import org.poom.sap.member.model.service.MemberService;
 import org.poom.sap.member.model.vo.Member;
 
@@ -18,42 +19,29 @@ import org.springframework.web.servlet.ModelAndView;
 @RequestMapping("member")
 /*@SessionAttributes("loginUser")*/
 public class MemberController {
+	Logger log = Logger.getLogger(this.getClass());
 	
 	@Autowired
 	private MemberService memberService;
 	
-	@RequestMapping(value="/login.do", method=RequestMethod.POST)
-	/*public String loginCheck(HttpServletRequest request){*/
+	@RequestMapping(value="/login.do", method = {RequestMethod.GET, RequestMethod.POST})
 	public ModelAndView loginCheck(Member member, ModelAndView mv, HttpSession session){
-		/*String userId = request.getParameter("userid");
-		String userPwd = request.getParameter("userpwd");
-		Member member = new Member();
-		member.setMember_id(userId);
-		member.setMember_pwd(userPwd);*/
-		//System.out.println(member.getMember_id() + ", " + member.getMember_pwd());
 		
 		Member loginUser = memberService.loginCheck(member);
 		
 		if(loginUser != null)
 			session.setAttribute("loginUser", loginUser);
 		
-		//ModelAndView mv = new ModelAndView();
-		mv.setViewName("home");
-//		mv.addObject("loginUser", loginUser);
-		//return "home";
+		mv.setViewName("redirect:/");
 		return mv;
 	}
 	
-	@RequestMapping("/logout.do")
+	@RequestMapping(value="/logout.do", method=RequestMethod.GET)
 	public String logOut(HttpSession session){
-		if(session != null)
-			session.invalidate();
-		
-		
-		//RequestDispatcher view = request.getRequestDispatcher("home.jsp");
-		//view.forward(request, response);
-		
-		return "home";
+		/*if(session != null)
+			session.invalidate();*/
+		session.setAttribute("loginUser", null);
+		return "redirect:/";
 	}
 	
 	@RequestMapping("/insert.do")

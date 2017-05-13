@@ -4,23 +4,23 @@ import java.sql.Date;
 
 public class Notice implements java.io.Serializable{
 	private int NOTICE_NO;
+	private String NOTICE_NICKNAME;
 	private String NOTICE_TITLE;
-	private String NOTICE_WRITER;
+	private String NOTICE_CONTENTS;
+	private String NOTICE_FILE;
 	private Date NOTICE_DATE;
-	private String NOTICE_CONTENT;
-	private int NOTICE_VIEWS;
 	
 	public Notice(){}
 	
-	public Notice(int NOTICE_NO, String NOTICE_TITLE, String NOTICE_WRITER,
-			Date NOTICE_DATE, String NOTICE_CONTENT, int NOTICE_VIEWS) {
+	public Notice(int NOTICE_NO, String NOTICE_NICKNAME, String NOTICE_TITLE,
+			String NOTICE_CONTENTS, String NOTICE_FILE, Date NOTICE_DATE) {
 		super();
 		this.NOTICE_NO = NOTICE_NO;
+		this.NOTICE_NICKNAME = NOTICE_NICKNAME;
 		this.NOTICE_TITLE = NOTICE_TITLE;
-		this.NOTICE_WRITER = NOTICE_WRITER;
+		this.NOTICE_CONTENTS = NOTICE_CONTENTS;
+		this.NOTICE_FILE = NOTICE_FILE;
 		this.NOTICE_DATE = NOTICE_DATE;
-		this.NOTICE_CONTENT = NOTICE_CONTENT;
-		this.setNOTICE_VIEWS(NOTICE_VIEWS);
 	}
 
 	public int getNOTICE_NO() {
@@ -31,6 +31,14 @@ public class Notice implements java.io.Serializable{
 		NOTICE_NO = nOTICE_NO;
 	}
 
+	public String getNOTICE_NICKNAME() {
+		return NOTICE_NICKNAME;
+	}
+
+	public void setNOTICE_NICKNAME(String nOTICE_NICKNAME) {
+		NOTICE_NICKNAME = nOTICE_NICKNAME;
+	}
+
 	public String getNOTICE_TITLE() {
 		return NOTICE_TITLE;
 	}
@@ -39,66 +47,35 @@ public class Notice implements java.io.Serializable{
 		NOTICE_TITLE = nOTICE_TITLE;
 	}
 
-	public String getNOTICE_WRITER() {
-		return NOTICE_WRITER;
+	public String getNOTICE_CONTENTS() {
+		return NOTICE_CONTENTS;
 	}
 
-	public void setNOTICE_WRITER(String nOTICE_WRITER) {
-		NOTICE_WRITER = nOTICE_WRITER;
+	public void setNOTICE_CONTENTS(String nOTICE_CONTENTS) {
+		NOTICE_CONTENTS = nOTICE_CONTENTS;
 	}
 
-	public java.sql.Date getNOTICE_DATE() {
+	public String getNOTICE_FILE() {
+		return NOTICE_FILE;
+	}
+
+	public void setNOTICE_FILE(String nOTICE_FILE) {
+		NOTICE_FILE = nOTICE_FILE;
+	}
+
+	public Date getNOTICE_DATE() {
 		return NOTICE_DATE;
 	}
 
-	public void setNOTICE_DATE(java.sql.Date nOTICE_DATE) {
+	public void setNOTICE_DATE(Date nOTICE_DATE) {
 		NOTICE_DATE = nOTICE_DATE;
-	}
-
-	public String getNOTICE_CONTENT() {
-		return NOTICE_CONTENT;
-	}
-
-	public void setNOTICE_CONTENT(String nOTICE_CONTENT) {
-		NOTICE_CONTENT = nOTICE_CONTENT;
-	}
-	
-	public int getNOTICE_VIEWS() {
-		return NOTICE_VIEWS;
-	}
-	
-	public void setNOTICE_VIEWS(int nOTICE_VIEWS) {
-		NOTICE_VIEWS = nOTICE_VIEWS;
 	}
 
 	@Override
 	public String toString() {
-		return "Notice [NOTICE_NO=" + NOTICE_NO + ", NOTICE_TITLE=" + NOTICE_TITLE + ", NOTICE_WRITER=" + NOTICE_WRITER
-				+ ", NOTICE_DATE=" + NOTICE_DATE + ", NOTICE_CONTENT=" + NOTICE_CONTENT + ", NOTICE_VIEWS="
-				+ NOTICE_VIEWS + "]";
-	}	
-	
-	
-	/*	
- 	public Notice(String noticeTitle, String noticeWriter, String noticeContent) {
-		super();
-		this.noticeTitle = noticeTitle;
-		this.noticeWriter = noticeWriter;
-		this.noticeContent = noticeContent;
+		return "Notice [NOTICE_NO=" + NOTICE_NO + ", NOTICE_NICKNAME=" + NOTICE_NICKNAME + ", NOTICE_TITLE="
+				+ NOTICE_TITLE + ", NOTICE_CONTENTS=" + NOTICE_CONTENTS + ", NOTICE_FILE=" + NOTICE_FILE
+				+ ", NOTICE_DATE=" + NOTICE_DATE + "]";
 	}
- 	*/
 
-	/*
-	public Notice(int noticeNo, String noticeTitle, String noticeWriter, Date noticeDate, String noticeContent, int hit) {
-		super();
-		this.noticeNo = noticeNo;
-		this.noticeTitle = noticeTitle;
-		this.noticeWriter = noticeWriter;
-		this.noticeDate = noticeDate;
-		this.noticeContent = noticeContent;
-		this.hit = hit;
-	}*/
-
-	
-	
 }
