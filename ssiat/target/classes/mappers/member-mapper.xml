@@ -25,5 +25,14 @@
 		SELECT * FROM MEMBER WHERE email = #{email} and password = #{password}
     	]]>
 	</select>
+	
+	<select id="joinedGgiri" parameterType="int" resultMap="memberResult">
+	SELECT PROFILE FROM MEMBER 
+	WHERE NICKNAME IN (SELECT G_J_NICKNAME FROM SSIATGGIRI_JOINED WHERE G_J_NO=#{g_j_no})
+	</select>
+	
+	<select id="memberProfile" parameterType="member" resultMap="memberResult">
+	SELECT PROFILE FROM MEMBER WHERE NICKNAME = #{g_nickname}
+	</select>
 
 </mapper>

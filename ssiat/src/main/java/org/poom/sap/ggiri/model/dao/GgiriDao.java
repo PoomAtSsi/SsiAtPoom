@@ -1,5 +1,6 @@
 package org.poom.sap.ggiri.model.dao;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.log4j.Logger;
@@ -75,6 +76,10 @@ public class GgiriDao {
 	
 	public List<Ggiri> ggiriProfile(Ggiri ggiri){
 		return (List<Ggiri>) sqlSession.selectList("memberProfile", ggiri);
+	}
+	
+	public ArrayList<Ggiri> myGgiri(Ggiri ggiri){
+		return (ArrayList<Ggiri>) sqlSession.selectList("myGgiri", ggiri);
 	}
 
 }

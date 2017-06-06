@@ -37,7 +37,8 @@
 	<button type="button"
 		onclick="location.href='itcp/firstInterceptor.do'">인터셉터</button>
 
-	
+	<hr>
+	<button type="button" onclick="location.href='ggiri/gMyGgiri.do?g_nickname=${loginUser.nickname}'">myssiat</button>
 <%-- 	<hr>
 	<jsp:include page="testvideo.do" />
 	 --%>
@@ -46,8 +47,8 @@
 <%-- 	<hr>
 	<jsp:include page="noriter/navereditor.do" /> --%>
 	
-
-
+	
+	
 	<hr>
 	<jsp:include page="menu/menuList.do" />
 

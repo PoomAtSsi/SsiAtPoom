@@ -155,5 +155,9 @@
 		select count(*) as totalCount from SSIATNORITER
 		]]>
 	</select>
+	
+	<select id="myNoriter">
+		SELECT * FROM SSIATNORITER WHERE N_NICKNAME = #{n_nickname}
+	</select>
 
 </mapper>

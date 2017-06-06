@@ -81,4 +81,9 @@ public class GgiriServiceImpl implements GgiriService{
 	public List<Ggiri> ggiriProfile(Ggiri ggiri)throws Exception{
 		return ggiriDao.ggiriProfile(ggiri);
 	}
+	
+	@Override
+	public ArrayList<Ggiri> myGgiri(Ggiri ggiri)throws Exception{
+		return (ArrayList<Ggiri>)ggiriDao.myGgiri(ggiri);
+	}
 }
