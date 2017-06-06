@@ -25,60 +25,46 @@ public class MemberController {
 	private MemberService memberService;
 	
 	@RequestMapping(value="/login.do", method=RequestMethod.POST)
-	/*public String loginCheck(HttpServletRequest request){*/
 	public ModelAndView loginCheck(Member member, ModelAndView mv, HttpSession session){
-		/*String userId = request.getParameter("userid");
-		String userPwd = request.getParameter("userpwd");
-		Member member = new Member();
-		member.setMember_id(userId);
-		member.setMember_pwd(userPwd);*/
-		//System.out.println(member.getMember_id() + ", " + member.getMember_pwd());
 		
 		Member loginUser = memberService.loginCheck(member);
 		
 		if(loginUser != null)
 			session.setAttribute("loginUser", loginUser);
 		
-		//ModelAndView mv = new ModelAndView();
-		mv.setViewName("home");
-//		mv.addObject("loginUser", loginUser);
-		//return "home";
+		mv.setViewName("redirect:/");
 		return mv;
 	}
 	
-	@RequestMapping("/logout.do")
+	@RequestMapping(value="/logout.do", method=RequestMethod.GET)
 	public String logOut(HttpSession session){
-		if(session != null)
-			session.invalidate();
-		
-		
-		//RequestDispatcher view = request.getRequestDispatcher("home.jsp");
-		//view.forward(request, response);
-		
-		return "home";
+		/*if(session != null)
+			session.invalidate();*/
+		session.setAttribute("loginUser", null);
+		return "redirect:/";
 	}
 	
-	@RequestMapping("/insert.do")
+	@RequestMapping(value="/insert.do", method=RequestMethod.POST)
 	public ModelAndView memberInsert(){
 		return null;
 	}
 	
-	@RequestMapping("/update.do")
+	@RequestMapping(value="/update.do", method=RequestMethod.POST)
 	public ModelAndView memberUpdate(){
 		return null;
 	}
 	
-	@RequestMapping("/delete.do")
+	@RequestMapping(value="/delete.do", method=RequestMethod.POST)
 	public String memberDelete(){
 		return null;
 	}
 	
-	@RequestMapping("/list.do")
+	@RequestMapping(value="/list.do", method=RequestMethod.GET)
 	public ModelAndView memberList(){
 		return null;
 	}
 	
-	@RequestMapping("/idSearch")
+	@RequestMapping(value="/idSearch", method=RequestMethod.GET)
 	public ModelAndView memberIdSeach(){
 		return null;
 	}

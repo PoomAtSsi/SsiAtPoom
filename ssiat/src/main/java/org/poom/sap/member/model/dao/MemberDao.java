@@ -18,7 +18,6 @@ public class MemberDao {
 	public MemberDao(){}
 
 	public Member selectLogin(Member loginVo) {
-		 System.out.println("dao : selectLogin run...");
 		return (Member) sqlSession.selectOne("loginSelect", loginVo);
 	}
 	

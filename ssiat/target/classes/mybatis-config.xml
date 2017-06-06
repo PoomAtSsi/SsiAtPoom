@@ -6,11 +6,23 @@
 	<typeAliases>
 		<typeAlias type="org.poom.sap.member.model.vo.Member" alias="member" />
 		<typeAlias type="org.poom.sap.notice.model.vo.Notice" alias="notice" />
+		<typeAlias type="org.poom.sap.noriter.model.vo.Noriter" alias="noriter" />
+		<typeAlias type="org.poom.sap.ggiri.model.vo.Ggiri" alias="ggiri"/>
+		<typeAlias type="org.poom.sap.file.model.vo.File" alias="file"/>
+		<typeAlias type="org.poom.sap.category.model.vo.Category" alias="category"/>
+		<typeAlias alias="notice" type="org.poom.sap.notice.model.vo.Notice"/>
 	</typeAliases>
 	
 	<mappers>
 		<mapper resource="mappers/member-mapper.xml" />
 		<mapper resource="mappers/notice-mapper.xml" />
+		<mapper resource="mappers/noriter-mapper.xml" />
+		<mapper resource="mappers/message-mapper.xml" />
+		<mapper resource="mappers/ggiri-mapper.xml" />
+		<mapper resource="mappers/file-mapper.xml"/>
+		<mapper resource="mappers/category-mapper.xml"/>
+		<mapper resource="mappers/notice-mapper.xml"/>
+		<mapper resource="mappers/noriter-mapper.xml"/>
 
 	</mappers>
 </configuration>
