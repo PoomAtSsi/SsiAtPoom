@@ -35,8 +35,8 @@ public class GgiriController {
 	public ModelAndView ggiriList(Ggiri ggiri, ModelAndView mv) throws Exception{
 		List<Ggiri> glist = ggiriService.ggiriList(ggiri);
 		
-		mv.setViewName("/ggiri/ggiriList");
 		mv.addObject("glist",glist);
+		mv.setViewName("/ggiri/ggiriList");
 		System.out.println("gct");
 		return mv;
 	}
@@ -163,6 +163,15 @@ public class GgiriController {
 		List<Ggiri> gplist = ggiriService.ggiriProfile(ggiri);
 		mv.setViewName("ggiri/ggiriDetailView");
 		mv.addObject("gplist",gplist);
+		return mv;
+	}
+	
+	//내가 만든 끼리 (마이페이지)리스트
+	@RequestMapping(value="gMyGgiri.do", method=RequestMethod.GET)
+	public ModelAndView myGgiri(Ggiri ggiri, ModelAndView mv)throws Exception{
+		ArrayList<Ggiri> mglist = ggiriService.myGgiri(ggiri);
+		mv.addObject("mglist", mglist);
+		mv.setViewName("mypage/myssiat");
 		return mv;
 	}
 }

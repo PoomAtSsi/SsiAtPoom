@@ -51,7 +51,7 @@
 		  
 		  INSERT INTO SSIATGGIRI VALUES(
 			   default,
-			   seq_ggiri.NEXTVAl,
+			   ggiri_seq.NEXTVAl,
 			   #{g_title},
 			   #{g_nickname},
 			   #{g_category,jdbcType=INTEGER},
@@ -128,6 +128,10 @@
 	<delete id="unlikeGgiri" parameterType="ggiri">
 		DELETE FROM SSIATGGIRI_LIKE WHERE G_L_NICKNAME=#{g_l_nickname} AND G_L_NO=#{g_l_no}
 	</delete> 
+	
+	<select id="myGgiri" resultMap="ggiriResult" parameterType="ggiri">
+		SELECT * FROM SSIATGGIRI WHERE G_NICKNAME = #{g_nickname}
+	</select>
 
 </mapper>	
 	

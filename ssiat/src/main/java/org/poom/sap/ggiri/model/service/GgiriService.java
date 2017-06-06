@@ -33,4 +33,6 @@ public interface GgiriService {
 	
 	List<Ggiri> ggiriProfile(Ggiri ggiri) throws Exception;
 	
+	ArrayList<Ggiri> myGgiri(Ggiri ggiri)throws Exception;
+	
 }
