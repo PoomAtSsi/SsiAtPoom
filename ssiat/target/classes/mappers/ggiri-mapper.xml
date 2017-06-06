@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE mapper PUBLIC
+"-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ggiriMapper">
+
+	<resultMap id="ggiriResult" type="ggiri">
+		<id property="g_no" column="G_NO" />
+		<result property="cat_no" column="CAT_NO"/>
+		<result property="g_title" column="G_TITLE" />
+		<result property="g_nickname" column="G_NICKNAME" />
+		<result property="g_category" column="G_CATEGORY" />
+		<result property="g_detail" column="G_DETAIL" />
+		<result property="g_career" column="G_CAREER" />
+		<result property="g_file" column="G_FILE" />
+		<result property="g_location" column="G_LOCATION" />
+		<result property="g_dday" column="G_DDAY" />
+		<result property="g_minppl" column="G_MINPPL" />
+		<result property="g_maxppl" column="G_MAXPPL" />
+		<result property="g_countppl" column="G_COUNTPPL" />
+		<result property="g_fee" column="G_FEE" />
+		<result property="g_like" column="G_LIKE" />
+		<result property="g_visibility" column="G_VISIBILITY" />
+		<result property="g_lx" column="G_LX" />
+		<result property="g_ly" column="G_LY" />
+		<result property="g_j_no" column="G_J_NO" />
+		<result property="g_j_nickname" column="G_J_NICKNAME" />
+		<result property="g_l_no" column="G_L_NO"/>
+		<result property="g_l_nickname" column="G_L_NICKNAME"/>
+	</resultMap>
+	
+	<select id="ggiriList" resultMap="ggiriResult">
+		SELECT * FROM SSIATGGIRI WHERE G_VISIBILITY=0 ORDER BY G_NO DESC
+	</select>
+	
+	<select id="categoryGgiri" resultMap="ggiriResult" parameterType="int">
+		SELECT * FROM SSIATGGIRI WHERE G_CATEGORY = #{g_category} 
+	</select>
+
+	
+	<select id="ggiriDetail" resultMap="ggiriResult" parameterType="int" >
+		SELECT * FROM SSIATGGIRI WHERE G_NO = #{g_no}
+	</select>
+	
+	<insert id="ggiriInsert" parameterType="ggiri" >
+	<!-- 	INSERT INTO SSIATGGIRI VALUES (4, #{g_title}, null,
+		#{g_category},
+		 #{g_detail}, #{g_career},null,
+		 #{g_location}, #{g_dday},
+		  #g{g_minppl}, #{g_maxppl},0,#{g_fee},0 ,0) -->
+		  
+		  INSERT INTO SSIATGGIRI VALUES(
+			   default,
+			   seq_ggiri.NEXTVAl,
+			   #{g_title},
+			   #{g_nickname},
+			   #{g_category,jdbcType=INTEGER},
+			   #{g_detail},
+			   #{g_career},
+			   #{g_file,jdbcType=VARCHAR},
+			   #{g_location,jdbcType=VARCHAR},
+			   #{g_dday,jdbcType=DATE},
+			   #{g_minppl,jdbcType=INTEGER},
+			   #{g_maxppl,jdbcType=INTEGER},
+			   0,
+			   #{g_fee},
+			   0,
+			   0,
+			   #{g_lx},
+			   #{g_ly}
+			 
+		
+		  )
+	</insert>
+	
+	<update id="ggiriUpdate" parameterType="ggiri">
+	<![CDATA[
+	UPDATE SSIATGGIRI SET
+	G_TITLE=#{g_title} ,
+	G_NICKNAME=#{g_nickname},
+	G_CATEGORY=#{g_category,jdbcType=INTEGER} ,
+	G_DETAIL= #{g_detail,jdbcType=VARCHAR},
+	G_CAREER=#{g_career,jdbcType=VARCHAR} ,
+	G_LOCATION=#{g_location,jdbcType=VARCHAR} ,
+	G_DDAY=#{g_dday ,jdbcType=DATE},
+	G_MINPPL= #{g_minppl},
+	G_MAXPPL= #{g_maxppl},
+	G_FEE= #{g_fee},
+	G_LX=#{g_lx},
+	G_LY=#{g_ly}
+	WHERE G_NO=#{g_no}
+	]]>
+	</update>
+	
+	 <update id="ggiriDelete" parameterType="int">
+	<![CDATA[
+	UPDATE SSIATGGIRI SET G_VISIBILITY = 1 
+	WHERE G_NO=#{g_no}
+	]]>
+	</update>
+	
+	<insert id="ggiriJoin" parameterType="ggiri">
+		INSERT INTO SSIATGGIRI_JOINED VALUES(
+			#{g_j_no},
+			#{g_j_nickname}
+		)
+	</insert>
+	
+	<update id="ggiriJoinCount" parameterType="int">
+	UPDATE SSIATGGIRI SET G_COUNTPPL = (SELECT COUNT(G_J_NO) 
+	FROM SSIATGGIRI_JOINED WHERE G_J_NO=#{g_no})
+	WHERE G_NO = #{g_no}
+	</update>
+	
+	<insert id="likeGgiri" parameterType="ggiri">
+	INSERT INTO SSIATGGIRI_LIKE VALUES(
+		#{g_l_no},
+		#{g_l_nickname}
+	)
+	</insert>
+	
+	<update id="likeGgiriCount" parameterType="int">
+		UPDATE SSIATGGIRI SET G_LIKE = (SELECT COUNT(G_L_NO)
+		FROM SSIATGGIRI_LIKE WHERE G_L_NO=#{g_no})
+		WHERE G_NO= #{g_no}
+	</update>
+	
+	<delete id="unlikeGgiri" parameterType="ggiri">
+		DELETE FROM SSIATGGIRI_LIKE WHERE G_L_NICKNAME=#{g_l_nickname} AND G_L_NO=#{g_l_no}
+	</delete> 
+
+</mapper>	
+	

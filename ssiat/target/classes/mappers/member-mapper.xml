@@ -5,19 +5,25 @@
 <mapper namespace="memberMapper">
 
 	<resultMap id="memberResult" type="member">
-		<id property="userid" column="userid" />
-		<result property="userpwd" column="userpwd" />
+		<id property="email" column="email" />
 		<result property="username" column="username" />
-		<result property="email" column="email" />
+		<result property="nickname" column="nickname" />
+		<result property="password" column="password" />
+		<result property="mobile" column="mobile" />
+		<result property="regdate" column="regdate" />
+		<result property="profile" column="profile" />
 		<result property="gender" column="gender" />
-		<result property="phone" column="phone" />
-		<result property="address" column="address" />
-		<result property="hobby" column="hobby" />
 		<result property="birth" column="birth" />
+		<result property="introduce" column="introduce" />
+		<result property="career" column="career" />
+		<result property="email_agree" column="email_agree" />
+		<result property="water" column="water" />
 	</resultMap>
 	
 	<select id="loginSelect" parameterType="member" resultMap="memberResult">
-		SELECT * FROM MEMBER2 WHERE USERID = #{userid} and USERPWD = #{userpwd}
+		 <![CDATA[
+		SELECT * FROM MEMBER WHERE email = #{email} and password = #{password}
+    	]]>
 	</select>
 
 </mapper>

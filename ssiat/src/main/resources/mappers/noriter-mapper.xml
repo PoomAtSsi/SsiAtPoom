@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE mapper PUBLIC
+"-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="noriterMapper">
+
+	<resultMap id="noriterResult" type="noriter">
+		<id property="classNo" column="N_CLASSNO" />
+		<result property="category" column="N_CATEGORY" />
+		<result property="nickname" column="N_NICKNAME" />
+		<result property="classTitle" column="N_CLASSTITLE" />
+		<result property="detail" column="N_DETAIL" />
+		<result property="video" column="N_VIDEO" />
+		<result property="career" column="N_CAREER" />
+		<result property="water" column="N_WATER" />
+		<result property="like" column="N_LIKE" />
+		<result property="count" column="N_COUNT" />
+		<result property="hidden" column="N_HIDDEN" />
+		<result property="date" column="N_DATE" />
+		<result property="visibility" column="N_VISIBILITY" />
+		<result property="videopath" column="N_VIDEOPATH" />
+		<result property="videoname" column="N_VIDEONAME" />
+	</resultMap>
+
+	<select id="noriterList" resultMap="noriterResult">
+		<![CDATA[
+		select X.N_CLASSNO,
+			X.N_CATEGORY,
+			X.N_NICKNAME,
+			X.N_CLASSTITLE,
+			X.N_DETAIL,
+			X.N_VIDEO,
+			X.N_CAREER,
+			X.N_WATER,
+			X.N_LIKE,
+			X.N_COUNT,
+			X.N_HIDDEN,
+			X.N_DATE,
+			X.N_VISIBILITY,
+			X.N_VIDEOPATH,
+			X.N_VIDEONAME
+		from ( 
+		    select A.N_CLASSNO,
+				A.N_CATEGORY,
+				A.N_NICKNAME,
+				A.N_CLASSTITLE,
+				A.N_DETAIL,
+				A.N_VIDEO,
+				A.N_CAREER,
+				A.N_WATER,
+				A.N_LIKE,
+				A.N_COUNT,
+				A.N_HIDDEN,
+				A.N_DATE,
+				A.N_VISIBILITY,
+				A.N_VIDEOPATH,
+				A.N_VIDEONAME
+		    from (
+		        select B.CATEGORY_ONE,
+		        	C.N_CLASSNO,
+					C.N_CATEGORY,
+					C.N_NICKNAME,
+					C.N_CLASSTITLE,
+					C.N_DETAIL,
+					C.N_VIDEO,
+					C.N_CAREER,
+					C.N_WATER,
+					C.N_LIKE,
+					C.N_COUNT,
+					C.N_HIDDEN,
+					C.N_DATE,
+					C.N_VISIBILITY,
+					C.N_VIDEOPATH,
+					C.N_VIDEONAME
+		        from SSIATNORITER C, CATEGORY B
+		        where C.N_CATEGORY = B.CATEGORY_NO
+		        order by N_CLASSNO) A
+		    where A.N_CLASSNO <= #{ end }
+		    AND (A.N_CATEGORY = #{ category }
+		    	OR A.CATEGORY_ONE = #{ category })
+		    ) X
+		where X.N_CLASSNO >= #{ start }
+		]]>
+	</select>
+
+	<insert id="noriterInsert" parameterType="noriter">
+		<![CDATA[
+		insert into SSIATNORITER (
+			N_CATEGORY,
+			N_CLASSNO,
+			N_NICKNAME,
+			N_CLASSTITLE,
+			N_DETAIL,
+			N_VIDEO,
+			N_CAREER,
+			N_WATER,
+			N_LIKE,
+			N_COUNT,
+			N_HIDDEN,
+			N_DATE,
+			N_VISIBILITY,
+			N_VIDEOPATH,
+			N_VIDEONAME
+		)
+		values (
+			#{category},
+			NORITER_SEQ.NEXTVAL,
+			#{nickname}, 
+			#{classTitle}, 
+			#{detail},
+			default,
+			#{career},
+			0,
+			0,
+			0,
+			0,
+			sysdate,
+			default,
+			#{videopath},
+			#{videoname}
+		)
+		]]>
+	</insert>
+
+	<!-- delete를 판별하는 컬럼을 추가한다면 delete가 아니라 update로 바꿔야 할듯 -->
+	<!-- 예제 <update id="deleteNoriter" parameterType="int"> UPDATE noriter SET 
+		is_deleted = 'Y' WHERE nno = #{nno} </update> -->
+
+	<update id="noriterDelete" parameterType="noriter">
+ 		<![CDATA[
+ 		UPDATE SSIATNORITER
+ 		SET N_VISIBILITY = 1
+		WHERE N_CLASSNO = #{classNo}
+		]]>
+	</update>
+
+	<select id="noriterDetail" resultMap="noriterResult"
+		parameterType="int">
+		SELECT * FROM SSIATNORITER
+		WHERE N_CLASSNO = #{classNo}
+	</select>
+
+	<update id="noriterUpdate" parameterType="noriter">
+		<![CDATA[
+		UPDATE SSIATNORITER
+		SET N_CLASSTITLE = #{classTitle}, 
+		N_DETAIL = #{detail},
+		N_VIDEO = #{video}
+		WHERE N_CLASSNO = #{classNo}
+		]]>
+	</update>
+
+	<select id="noriterTC" resultType="java.lang.Integer">
+		<![CDATA[
+		select count(*) as totalCount from SSIATNORITER
+		]]>
+	</select>
+
+</mapper>

@@ -26,7 +26,7 @@ public class HomeController {
 	 */
 	@RequestMapping(value = "homeStart.do", method = RequestMethod.GET)
 	public String home(Locale locale, Model model) {
-		logger.info("Welcome home! The client locale is {}.", locale);
+		logger.info("Homecontroller start");
 		
 		return "home";
 	}

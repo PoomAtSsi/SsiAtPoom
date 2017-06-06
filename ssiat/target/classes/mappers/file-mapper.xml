@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC
+"-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="fileMapper">
+
+	<resultMap id="fileResult" type="file">
+		<id property="g_no" column="G_NO" />
+		<result property="g_title" column="G_TITLE" />
+		<result property="g_nickname" column="G_NICKNAME" />
+		<result property="g_category" column="G_CATEGORY" />
+		<result property="g_detail" column="G_DETAIL" />
+		<result property="g_career" column="G_CAREER" />
+		<result property="g_file" column="G_FILE" />
+		<result property="g_location" column="G_LOCATION" />
+		<result property="g_dday" column="G_DDAY" />
+		<result property="g_minppl" column="G_MINPPL" />
+		<result property="g_maxppl" column="G_MAXPPL" />
+		<result property="g_countppl" column="G_COUNTPPL" />
+		<result property="g_fee" column="G_FEE" />
+		<result property="g_like" column="G_LIKE" />
+		<result property="g_visibility" column="G_VISIBILITY" />
+		<result property="g_lx" column="G_LX" />
+		<result property="g_ly" column="G_LY" />
+		<result property="g_j_no" column="G_J_NO" />
+		<result property="g_j_nickname" column="G_J_NICKNAME" />
+	</resultMap>
+</mapper>

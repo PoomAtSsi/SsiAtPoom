@@ -15,7 +15,6 @@ public class MemberServiceImpl implements MemberService{
 
 	@Override
 	public Member loginCheck(Member vo) {
-		System.out.println("service : loginCheck run...");
 		return memberDao.selectLogin(vo);
 		
 	}

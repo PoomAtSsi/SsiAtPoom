@@ -1,0 +1,67 @@
+.row {
+  padding:7px;
+}
+
+#kakao {
+  width:65px;
+  margin-left:20px;
+  margin-right:20px;
+}
+#kakaostory-share-button{
+	width:45px;
+  margin-left:20px;
+  margin-right:20px;
+}
+#naver {
+  width:45px;
+}
+#facebook {
+  width:45px;
+}
+
+.option {
+  font-size:12pt;
+  text-align:left;
+  padding:20px;
+}
+
+#calendar {
+  width:120px;
+  border:none;
+  border-bottom:solid 1px;
+}
+
+.share {
+  text-align:center;
+}
+
+
+#fee {
+  font-size:16pt;
+  text-align:right;
+}
+
+.soption {
+  padding-top:initial;
+}
+
+#profile {
+  width:80%;
+  border-radius:50%;
+}
+
+.btn.btn-danger.btn-lg.center-block {
+  width:270px;
+  height:50px;
+  border:none;
+  font-size:14pt;
+  background:#fca55d;
+  font-weight:500;
+}
+
+.user {
+  border-radius:50%;
+  width:10%;
+  margin:10px;
+}
+
