@@ -1,0 +1,28 @@
+div.col-md-3.col-sm-4.item {
+  width:25%;
+}
+
+p.text-center {
+  width:1024px;
+  text-align:left;
+}
+
+div.box {
+  height:20%;
+}
+
+div.team-grid {
+}
+
+h4.text-left.joinggiri {
+  color:#7d8285;
+}
+
+div.panel-heading {
+  padding:0px;
+}
+
+ul.pagination {
+  padding-left:15px;
+}
+
