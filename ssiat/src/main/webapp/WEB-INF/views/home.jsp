@@ -10,6 +10,8 @@
 <link rel="stylesheet" href="/sap/resources/bootstrap/css/bootstrap.min.css">
 <script type="text/javascript" src="/sap/resources/js/jquery.min.js"></script>
 <script src="/sap/resources/bootstrap/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="https://static.nid.naver.com/js/naverLogin_implicit-1.0.3.js" charset="utf-8"></script>
+<script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>
 
 <title>Home</title>
 
@@ -345,21 +347,71 @@
 
 </head>
 <body>
-	<h1>Welcome! Sample Project!</h1>
+	<h1>S A P</h1>
 
 	<c:if test="${empty loginUser }">
-		<P>The time on the server is ${serverTime}.</P>
-		<form action="member/login.do" method="post">
-			<label>email : <input type="text" name="email"></label><br>
-			<label>password : <input type="password" name="password"></label><br>
-			<input type="submit" value="로그인">
-		</form>
+		<section class="container container-top container-center">
+			<div class="vcenter-tb">
+				<div class="row vcenter-tc ">
+					<form action="member/login.do" method="post" id="login-form" class="col-md-5 col-sm-12 col-centered well">
+					
+						<div class="form-group">
+		        <label for="id">E-Mail</label>
+		        <input type="text" class="form-control" name="email" id="email" autocomplete="off" placeholder="이메일을 입력하세요." value="" autofocus="autofocus"/>
+		       </div>
+		       
+		       <div class="form-group">
+		       	<label for="password">PASSWORD</label>
+							<input type="password" class="form-control" name="password" id="password" placeholder="암호를 입력하세요.">
+		       </div>
+		       
+		       <div class="checkbox checkbox-info checkbox-circle">
+		       	<input type="checkbox" name="rememberId" id="rememberId" <c:if test="${ !empty cookie.REMEMBER.value }">checked</c:if>>
+		       	<label for="rememberId">
+		       			아이디 기억하기
+		       	</label>
+		       </div>
+		 
+		       <div class="form-group">
+		       	<input type="submit" class="btn btn-primary btn-block" value="로그인" />
+		       </div>
+		       
+		       <div class="form-group text-center">
+		       	<a href="#">아이디/비밀번호 잊으셨나요?</a>
+		       </div>
+		       
+		       <div class="form-group text-center">
+		       	<a href="member/insert.do" class="point-color"><strong>회원가입</strong></a>
+		       </div>
+		      </form>
+		      <form action="" hidden=""></form>
+		      </div>
+				</div>
+		</section>
+		<a href="idSearch.do">아이디찾기</a>
+		<a href="pwSearch.do">비밀번호찾기</a>	
 	</c:if>
 	
 	
 	<c:if test="${!empty loginUser }">
-		${loginUser.username } 님 <a href="member/logout.do">로그아웃</a>
+		${loginUser.username } 님 
+		<a href="member/logout.do">로그아웃</a>
+		<a href="detail.do">회원상세보기</a>
 	</c:if>
+	
+	<!-- 카카오톡 로그인 -->
+	<br/>
+	<a id="kakao-login-btn"></a>
+	<a href="http://developers.kakao.com/login"></a>
+	
+	<!-- 네이버 로그인 -->
+	<!-- 소스1 -->
+	<!-- 네이버아이디로로그인 버튼 노출 영역 -->
+	<br/>
+	<div id="naver_id_login"></div>
+	  
+	  <!-- //네이버아이디로로그인 버튼 노출 영역 (초기화) -->
+	<!-- 소스2 네이버로그인 Callback 페이지 처리 Script -->
 
 	<form name="frm" id="frm_msg" action="message/msgList.do" method="post">
    <a href="javascript:fn_msg();">쪽지보내기</a>
@@ -464,4 +516,55 @@
 <!-- 파일 업로드 부분 -->
 
 </body>
+<script type='text/javascript'>
+	  //<![CDATA[
+	    // 사용할 앱의 JavaScript 키를 설정해 주세요.
+	    Kakao.init('2f1bbc382d22d674e0c8437fc1955405');
+	    // 카카오 로그인 버튼을 생성합니다.
+	    Kakao.Auth.createLoginButton({
+	      container: '#kakao-login-btn',
+	      success: function(authObj) {
+	    	  Kakao.API.request({
+	    		  url: '/v1/user/me',
+	    		  success: function(res){
+	    			  alert(res.properties.nickname+'님 환영합니다.');
+	    			  location.href="./result?name="+res.properties.nickname;
+	    		  },
+	    		  fail: function(error){
+	    			  alert(JSON.stringify(error));
+	    		  }
+	    	  }); 
+	        /* alert(JSON.stringify(authObj)); */
+	      }, 
+	      fail: function(err) {
+	         alert(JSON.stringify(err));
+	      }
+	    });
+	    function ktout(){
+	    	Kakao.Auth.logout(function (){
+	    		setTimeout(function(){
+	    			location.href="http://127.0.0.1:8888/sap/"
+	      		},1000);//로그아웃 처리되는 타임을 임시적으로 1000설정 (=1초)
+	    	});
+	    }
+	  //]]>
+	   
+	  /* 네이버 로그인 기능 */
+	  var naver_id_login = new naver_id_login("gIb5ar6Fpo67ifmKs3vc", "http://localhost:8888/sap/");
+	  	var state = naver_id_login.getUniqState();
+	  	naver_id_login.setButton("white", 2,40);
+	  	naver_id_login.setDomain(".service.com");
+	  	naver_id_login.setState(state);
+	//  	naver_id_login.setPopup();
+	  	naver_id_login.init_naver_id_login();
+	  	
+	  	 // 네이버 사용자 프로필 조회 이후 프로필 정보를 처리할 callback function 
+		  function naverSignInCallback() {
+		//    alert(naver_id_login.getProfileData('email'));
+		      alert(naver_id_login.getProfileData('nickname'));
+		//    alert(naver_id_login.getProfileData('age'));
+		  }
+		  // 네이버 사용자 프로필 조회
+		  naver_id_login.get_naver_userprofile("naverSignInCallback()");
+	</script>
 </html>

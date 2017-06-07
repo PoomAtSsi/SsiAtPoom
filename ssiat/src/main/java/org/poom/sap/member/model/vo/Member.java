@@ -9,6 +9,7 @@ public class Member {
 	private String password;
 	private String mobile;
 	private Date regdate;
+	private String file;
 	private String profile;
 	private String gender;
 	private Date birth;
@@ -19,10 +20,9 @@ public class Member {
 	
 	public Member(){}
 
-	public Member(String email, String username, String nickname, String password,
-			String mobile, Date regdate,
-			String profile, String gender, Date birth,
-			String introduce, String career, int email_agree, int water) {
+	public Member(String email, String username, String nickname, String password, String mobile, Date regdate,
+			String file, String profile, String gender, Date birth, String introduce, String career, int email_agree,
+			int water) {
 		super();
 		this.email = email;
 		this.username = username;
@@ -30,6 +30,7 @@ public class Member {
 		this.password = password;
 		this.mobile = mobile;
 		this.regdate = regdate;
+		this.file = file;
 		this.profile = profile;
 		this.gender = gender;
 		this.birth = birth;
@@ -85,6 +86,14 @@ public class Member {
 
 	public void setRegdate(Date regdate) {
 		this.regdate = regdate;
+	}
+
+	public String getFile() {
+		return file;
+	}
+
+	public void setFile(String file) {
+		this.file = file;
 	}
 
 	public String getProfile() {
@@ -143,13 +152,6 @@ public class Member {
 		this.water = water;
 	}
 
-	@Override
-	public String toString() {
-		return "Member [email=" + email + ", username=" + username + ", nickname=" + nickname + ", password=" + password
-				+ ", mobile=" + mobile + ", regdate=" + regdate + ", profile=" + profile + ", gender=" + gender
-				+ ", birth=" + birth + ", introduce=" + introduce + ", career=" + career + ", email_agree="
-				+ email_agree + ", water=" + water + "]";
-	}
-
+	
 	
 }
