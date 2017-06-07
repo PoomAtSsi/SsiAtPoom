@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.log4j.Logger;
+import org.poom.sap.common.util.Paging;
 import org.poom.sap.ggiri.model.dao.GgiriDao;
 import org.poom.sap.ggiri.model.vo.Ggiri;
 import org.poom.sap.notice.model.vo.Notice;
@@ -20,15 +21,11 @@ public class GgiriServiceImpl implements GgiriService{
 	GgiriDao ggiriDao;
 	
 	@Override
-	public List<Ggiri> ggiriList(Ggiri ggiri) throws Exception{
+	public List<Ggiri> ggiriList(Ggiri ggiri, Paging paging, int category) throws Exception{
 		log.debug("gser");
-		return ggiriDao.ggiriList(ggiri);
+		return ggiriDao.ggiriList(ggiri, paging, category);
 	}
 	
-	@Override
-	public List<Ggiri> categoryGgiri(Ggiri ggiri)throws Exception{
-		return ggiriDao.CategoryGgiri(ggiri);
-	}
 	
 	@Override
 	public List<Ggiri> ggiriDetail(int g_no) throws Exception{
@@ -83,7 +80,12 @@ public class GgiriServiceImpl implements GgiriService{
 	}
 	
 	@Override
-	public ArrayList<Ggiri> myGgiri(Ggiri ggiri)throws Exception{
-		return (ArrayList<Ggiri>)ggiriDao.myGgiri(ggiri);
+	public ArrayList<Ggiri> myGgiri(String g_nickname)throws Exception{
+		return (ArrayList<Ggiri>)ggiriDao.myGgiri(g_nickname);
+	}
+	
+	@Override
+	public int ggiriTC(Ggiri ggiri) {
+		return ggiriDao.ggiriTC(ggiri);
 	}
 }

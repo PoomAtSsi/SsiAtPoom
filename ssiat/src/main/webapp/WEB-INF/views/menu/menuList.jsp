@@ -26,7 +26,7 @@
 </head>
 <center>
 	<ul class="pagination">
-		<li><a href="ggiri/glist.do"><span>씨앗끼리</span></a></li>
+		<li><a href="ggiri/glist.do?page=1&category=1"><span>씨앗끼리</span></a></li>
 		
 		<li><a href="#"><span>씨앗놀이터</span></a></li>
 	</ul>

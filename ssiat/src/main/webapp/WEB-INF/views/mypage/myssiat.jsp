@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -11,35 +11,34 @@
     <link rel="stylesheet" href="/sap/resources/fonts/font-awesome.min.css">
     <link rel="stylesheet" href="/sap/resources/css/styless.css">
     <link rel="stylesheet" href="/sap/resources/css/Team-Grid.css">
-
 </head>
 
 <body>
     <div class="team-grid">
     <div class="container">
         <div class="intro">
-            <h2 class="text-left">나의 씨앗끼리</h2>
+            <h2 class="text-left">My SSIAT</h2>
              <div class="panel-heading">
         <h3 class="panel-title"><span class="fa-stack">
             <i class="fa fa-circle fa-stack-2x text-muted"></i>
-            <i class="fa fa-heart fa-stack-1x fa-inverse text-left favoritemember"></i></span>내가 관심있는 씨앗끼리</h3>
+            <i class="fa fa-heart fa-stack-1x fa-inverse text-left favoritemember"></i></span>내가 만든 씨앗놀이터</h3>
             </div>
         </div>
         <div class="row people">
+                    <input type="hidden" name="nickname" value="${loginUser.nickname }"/>
+        <c:forEach items="${mnlist }" var="mn">
             <div class="col-md-3 col-sm-6 item">
-                <div class="box" style="background-image:url(assets/img/1.jpg)">
+                <div class="box" style="background-image:url(/sap/resources/img/1.jpg)">
                     <div class="cover">
-                        <h3 class="name">Ben Johnson</h3>
-                        <p class="title">Musician</p>
-                        <div class="social"><a href="#"><i class="fa fa-facebook-official"></i></a>
-                            <a href="#"><i class="fa fa-twitter"></i></a>
-                            <a href="#"><i class="fa fa-instagram"></i></a>
-                        </div>
+                        <h3 class="name">${mn.classTitle }</h3>
+                        <p class="title">${mn.date }</p>
+                        <p class="title">신청한 인원 : ${mn.count } 명</p>
                         <br><button class="btn btn-primary" type="button"> 
                         <i class="fa fa-trash-o"></i></button>
                     </div>
                 </div>
             </div>
+            </c:forEach>
               <div class="row">
             <div class="col-md-12">
                 <nav>
@@ -70,6 +69,7 @@
             </div>
         </div>
         <div class="row people">
+                    <input type="hidden" name="g_nickname" value="${loginUser.nickname }"/>
         <c:forEach items="${mglist }" var="mg">
             <div class="col-md-3 col-sm-6 item">
                 <div class="box" style="background-image:url(/sap/resources/img/1.jpg)">

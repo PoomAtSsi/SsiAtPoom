@@ -8,7 +8,7 @@ public class Ggiri implements Serializable{
 	private int g_no;
 	private String g_title;
 	private String g_nickname;
-	private int g_category;
+	private int category;
 	private String g_detail;
 	private String g_career;
 	private String g_file;
@@ -91,12 +91,12 @@ public class Ggiri implements Serializable{
 		this.g_nickname = g_nickname;
 	}
 
-	public int getG_category() {
-		return g_category;
+	public int getCategory() {
+		return category;
 	}
 
-	public void setG_category(int g_category) {
-		this.g_category = g_category;
+	public void setCategory(int category) {
+		this.category = category;
 	}
 
 	public String getG_detail() {
@@ -219,7 +219,7 @@ public class Ggiri implements Serializable{
 		this.g_j_nickname = g_j_nickname;
 	}
 
-	public Ggiri(int cat_no,int g_no, String g_title, String g_nickname, int g_category, String g_detail, String g_career,
+	public Ggiri(int cat_no,int g_no, String g_title, String g_nickname, int category, String g_detail, String g_career,
 			String g_file, String g_location, Date g_dday, int g_minppl, int g_maxppl, int g_countppl, int g_fee,
 			int g_like, int g_visibility, double g_lx, double g_ly) {
 		super();
@@ -227,7 +227,7 @@ public class Ggiri implements Serializable{
 		this.g_no = g_no;
 		this.g_title = g_title;
 		this.g_nickname = g_nickname;
-		this.g_category = g_category;
+		this.category = category;
 		this.g_detail = g_detail;
 		this.g_career = g_career;
 		this.g_file = g_file;
@@ -245,8 +245,8 @@ public class Ggiri implements Serializable{
 
 	@Override
 	public String toString() {
-		return "Ggiri [g_no=" + g_no + ", g_title=" + g_title + ", g_nickname=" + g_nickname + ", g_category="
-				+ g_category + ", g_detail=" + g_detail + ", g_career=" + g_career + ", g_file=" + g_file
+		return "Ggiri [g_no=" + g_no + ", g_title=" + g_title + ", g_nickname=" + g_nickname + ", category="
+				+ category + ", g_detail=" + g_detail + ", g_career=" + g_career + ", g_file=" + g_file
 				+ ", g_location=" + g_location + ", g_dday=" + g_dday + ", g_minppl=" + g_minppl + ", g_maxppl="
 				+ g_maxppl + ", g_countppl=" + g_countppl + ", g_fee=" + g_fee + ", g_like=" + g_like
 				+ ", g_visibility=" + g_visibility + ", g_lx=" + g_lx + ", g_ly=" + g_ly + ", g_j_no=" + g_j_no

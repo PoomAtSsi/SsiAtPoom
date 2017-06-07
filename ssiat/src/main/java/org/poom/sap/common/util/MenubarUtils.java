@@ -5,6 +5,8 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.log4j.Logger;
+import org.poom.sap.ggiri.model.service.GgiriService;
+import org.poom.sap.ggiri.model.vo.Ggiri;
 import org.poom.sap.noriter.model.service.NoriterService;
 import org.poom.sap.noriter.model.vo.Noriter;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,13 +38,6 @@ public class MenubarUtils {
 		return "menu/noriterList";
 	}*/
 	
-	@RequestMapping(value="/ggiriList.do", method = RequestMethod.GET)
-	public ModelAndView ggiriList(ModelAndView mv) throws Exception{
-		
-		mv.setViewName("menu/ggiriList");
-		
-		return mv;
-	}
 		
 	@RequestMapping(value="/noriterList.do", method = RequestMethod.GET)
 	public ModelAndView noriterList(Noriter noriter, ModelAndView mv, Paging npaging, HttpServletRequest request) throws Exception{
