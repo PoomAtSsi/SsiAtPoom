@@ -8,8 +8,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.apache.log4j.Logger;
+import org.poom.sap.common.util.Paging;
+import org.poom.sap.common.util.PagingUtils;
 import org.poom.sap.ggiri.model.service.GgiriService;
 import org.poom.sap.ggiri.model.vo.Ggiri;
+import org.poom.sap.noriter.model.service.NoriterService;
+import org.poom.sap.noriter.model.vo.Noriter;
 import org.poom.sap.notice.model.vo.Notice;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -30,26 +34,45 @@ public class GgiriController {
 	@Autowired
 	private GgiriService ggiriService;
 	
+	@Autowired
+	private NoriterService noriterService;
+	
+	private PagingUtils pu = new PagingUtils();
+	
 	//끼리목록
 	@RequestMapping(value="/glist.do", method=RequestMethod.GET)
-	public ModelAndView ggiriList(Ggiri ggiri, ModelAndView mv) throws Exception{
-		List<Ggiri> glist = ggiriService.ggiriList(ggiri);
+	public ModelAndView ggiriList(@RequestParam(value="category") int category,Ggiri ggiri, ModelAndView mv,Paging gpaging, HttpServletRequest request) throws Exception{
+		
+		// paging
+		int a = 1;
+		int b = 1;
+		a = ggiriService.ggiriTC(ggiri);
+		pu.setChangedTotalCount(a);
+		pu.setChangedPage(b);
+		
+		//전달받은 현재 페이지 추출
+		if(request.getParameter("page") != null){
+			b =Integer.parseInt(request.getParameter("page"));
+			pu.setChangedPage(b);
+		}
+		gpaging = pu.ggiriPaging();
+		
+		List<Ggiri> glist = ggiriService.ggiriList(ggiri, gpaging, category);
 		
 		mv.addObject("glist",glist);
+		mv.addObject("page", gpaging.getPage());
+		mv.addObject("countList", gpaging.getCountList());
+		mv.addObject("countPage", gpaging.getCountPage());
+		mv.addObject("totalPage", gpaging.getTotalPage());
+		mv.addObject("startPage", gpaging.getStartPage());
+		mv.addObject("endPage", gpaging.getEndPage());
+		mv.addObject("category", category);
 		mv.setViewName("/ggiri/ggiriList");
 		System.out.println("gct");
 		return mv;
 	}
 	
-	//끼리 카테고리별 리스트
-	/*@RequestMapping(value="/gCate.do",method=RequestMethod.GET)
-	public ModelAndView CateGgiri(Ggiri ggiri, ModelAndView mv)throws Exception{
-		List<Ggiri> glist = ggiriService.ggiriList(ggiri);
-		
-		mv.setViewName("ggiri/ggiriList");
-		mv.addObject("glist", glist);
-		return mv;
-	}*/
+	
 	
 	//끼리 상세보기
 	@RequestMapping(value="/gDetail.do", method=RequestMethod.GET)
@@ -143,8 +166,8 @@ public class GgiriController {
 	public String LikeGgiri(Ggiri ggiri, @RequestParam("g_no") int g_no)throws Exception{
 		
 		//List<Ggiri> glist = ggiriService.ggiriDetail(g_no);
-		System.out.println(g_no);
-		System.out.println(ggiri);
+		/*System.out.println(g_no);
+		System.out.println(ggiri);*/
 		ggiriService.likeGgiri(ggiri, g_no);
 		return "redirect:/";
 	}
@@ -168,8 +191,13 @@ public class GgiriController {
 	
 	//내가 만든 끼리 (마이페이지)리스트
 	@RequestMapping(value="gMyGgiri.do", method=RequestMethod.GET)
-	public ModelAndView myGgiri(Ggiri ggiri, ModelAndView mv)throws Exception{
-		ArrayList<Ggiri> mglist = ggiriService.myGgiri(ggiri);
+	public ModelAndView myGgiri(@RequestParam("g_nickname")String g_nickname,
+			@RequestParam("nickname")String nickname,ModelAndView mv)throws Exception{
+		/*String nick = noriter.getNickname();
+		nick = ggiri.setG_nickname(g_nickname);*/
+		List<Noriter> mnlist = noriterService.myNoriter(nickname);
+		ArrayList<Ggiri> mglist = ggiriService.myGgiri(g_nickname);
+		mv.addObject("mnlist",mnlist);
 		mv.addObject("mglist", mglist);
 		mv.setViewName("mypage/myssiat");
 		return mv;

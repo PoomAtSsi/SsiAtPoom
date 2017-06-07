@@ -81,7 +81,7 @@
 							data: queryString,
 							dataType:"json",
 							error:function(status,error){
-								alert("즐겨찾기 추가 성공");
+								alert("즐겨찾기 취소");
 							},
 							success: function(json) {
 								alert("success");
@@ -97,7 +97,7 @@
 	    						data: queryString,
 	    						dataType:"json",
 	    						error:function(status,error){
-	    							alert("즐겨찾기 취소");
+	    							alert("즐겨찾기 추가");
 	    						},
 	    						success: function(json) {
 	    							alert("success");

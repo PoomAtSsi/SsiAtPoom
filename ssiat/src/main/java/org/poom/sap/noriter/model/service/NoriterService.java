@@ -19,4 +19,6 @@ public interface NoriterService {
 	void noriterUpdate(Noriter noriter) throws Exception;
 	
 	int noriterTC(Noriter noriter);
+	
+	List<Noriter> myNoriter( String nickname)throws Exception;
 }

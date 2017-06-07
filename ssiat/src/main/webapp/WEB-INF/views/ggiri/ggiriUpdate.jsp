@@ -19,7 +19,7 @@
 
 <!-- 다음 지도 API용 css -->
 <style>
-    .map_wrap {position:relative;width:100%;height:350px;}
+    .map_wrap {position:relative;width:100%;height:220px;left:25px;}
     .title {font-weight:bold;display:block;}
     #centerAddr {display:block;margin-top:2px;font-weight: normal;}
     .bAddr {padding:5px;text-overflow: ellipsis;overflow: hidden;white-space: nowrap;}
@@ -69,7 +69,7 @@
                     <option value="11">게임</option>
                     <option value="12">기타</option>
                 </select>
-                <input type="hidden" id="catSelect" name="g_category" placeholder="${g.g_category }"></input>
+                <input type="hidden" id="catSelect" name="g_category" placeholder="${g.category }"></input>
                 <p></p>
                 <br>
                 
@@ -90,6 +90,7 @@
             </div>
         </div>
         
+        <!-- 오른쪼 -->
         <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
           <div class="col-lg-10 col-md-10 col-sm-10 col-xs-10">
             <p></p>
@@ -97,7 +98,7 @@
                <input type="text" id="datepicker" name="g_dday" value="${g.g_dday }"style="width:90%;height:40px;border:none;border-bottom:solid 2px #fca55d;color:silver;font-size:13pt;">
 	              <p></p>
            		   <br>
-              
+              <img src="/sap/resources/img/user.png"/>
               <select id="minpselect">
 					<option value="minp">최소인원</option>
 					<option value="1">1</option>
@@ -152,6 +153,7 @@
 					<option value="50">50</option>
               </select>
               <p></p>
+              <img src="/sap/resources/img/users.png"/>
                 <select id="maxpselect" style="width:90%;height:40px;border:none;border-bottom:solid 2px #fca55d;color:silver;font-size:13pt;">
 					<option value="minp">최대인원</option>
 					<option value="1">1</option>
@@ -210,6 +212,7 @@
                 <input type="hidden" id="xppl" name="g_maxppl"></input>
                 
               <p></p>
+              <img src="/sap/resources/img/growth.png"/>
               <input type="text" id="fee" name="g_fee" value="${g.g_fee }">
               <p></p>
               <br>
@@ -225,17 +228,42 @@
 			    <div id="map" style="max-width:400px;max-height:200px;width:100%;height:100%;position:relative;overflow:hidden;"></div>
 				</div>
 				
-              <div id="2btn">
-             	<input type="button" id="btn" value="등록하기" onclick="goSubmit();">
-                <input type="button" id="btn" value="취소">
-              </div>      
+                  <br>
             </div>
         </div>
     </div>
-</c:forEach>
+	</c:forEach>
+    </form>
+</div>
+<div class="col-lg-12" style="text-align:center;">
+<span>
+	<input type="button" id="btn_submit" value="등록하기" onclick="goSubmit();"style="
+	  height:40px;
+	  width:15%;
+	  background-color:#fcad55;
+	  border:none;
+	  border-radius:5px;
+	  color:white;
+	  font-size:12pt;
+	">
+</span>
+<span>
+	<input type="button" id="btn_cancel" value="취소" style="
+	  height:40px;
+	  width:15%;
+	  background-color:#fcad55;
+	  border:none;
+	  border-radius:5px;
+	  color:white;
+	  font-size:12pt;
+	">
+</span>
+</div>
+   
+</body>
 
 <script type="text/javascript" src="//apis.daum.net/maps/maps3.js?apikey=81519983fca4821881cd6c90faa6fb09&libraries=services"></script>
-	<script>
+<script>
 	$("#cateselect").change(function() {
 	    var selectVar = $("#cateselect option:selected").val();
 	    $("#catSelect").val(selectVar);
@@ -381,12 +409,7 @@
 	        marker.setMap(map);
 	    }
 	} 
-		</script>
-    </form>
-</div>
-   
-</body>
-
+</script>
 
 
 <!-- 지도 API 관련 자바 스크립트 끝 -->

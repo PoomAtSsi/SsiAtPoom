@@ -50,5 +50,9 @@ public class NoriterServiceImpl implements NoriterService{
 	}
 	
 	
+	@Override
+	public List<Noriter> myNoriter(String nickname){
+		return noriterDao.myNoriter(nickname);
+	}
 
 }

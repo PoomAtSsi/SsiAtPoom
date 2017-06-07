@@ -30,7 +30,6 @@
 	</classpathentry>
 	<classpathentry kind="lib" path="src/main/webapp/WEB-INF/lib/jstl-1.2.jar"/>
 	<classpathentry kind="lib" path="src/main/webapp/WEB-INF/lib/ojdbc6-11.2.0.3.jar"/>
-	<classpathentry kind="lib" path="src/main/webapp/WEB-INF/lib/spring-webmvc-4.3.8.RELEASE.jar"/>
 	<classpathentry kind="con" path="org.eclipse.jst.server.core.container/org.eclipse.jst.server.tomcat.runtimeTarget/ssiat">
 		<attributes>
 			<attribute name="owner.project.facets" value="jst.web"/>
