@@ -1,6 +1,7 @@
 package org.poom.sap.notice.model.dao;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -9,7 +10,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-
+import org.poom.sap.common.util.Paging;
 import org.poom.sap.notice.model.vo.Notice;
 
 @Repository("noticeDao")
@@ -21,23 +22,22 @@ public class NoticeDao {
 	
 	public NoticeDao(){}
 
-	/*
-	public List<Notice> noticeInsert() {
-		 System.out.println("dao : selectLogin run...");
-		return qlSession.selectList("noticeInsert");
-	}*/
-	
-	/*@SuppressWarnings("unchecked")
-    public List<Map<String, Object>> selectBoardList(Map<String, Object> map) throws Exception{
-        return (List<Map<String, Object>>) sqlSession.selectList("noticeInsert", map);
-    }*/
-
 	@SuppressWarnings("unchecked")
-	public ArrayList<Notice> noticeList(Notice notice) throws Exception {
-		return (ArrayList<Notice>) sqlSession.selectList("noticeList", notice);
-	}
-	public List<Map<String, Object>> noticeInsert2(Map<String, Object> map) {
-		return (List<Map<String, Object>>) sqlSession.selectList("noticeInsert2", map);
+	public List<Notice> noticeList(Notice notice, Paging paging) throws Exception {
+		Map map = new HashMap();
+		int start = ((paging.getPage() -1 ) * 10) + 1;
+		int end = (paging.getPage() * 10);
+		System.out.println("start : " + start);
+		System.out.println("end : " + end);
+		
+//		map.put("notice", notice);
+		map.put("start", start);
+		map.put("end", end);
+		
+		return  (List<Notice>) sqlSession.selectList("noticeList", map);
+		
+		
+//		return (List<Notice>) sqlSession.selectList("noticeList", notice);
 	}
 
 	@SuppressWarnings("unchecked")
@@ -49,16 +49,28 @@ public class NoticeDao {
 		//근데 selectList하니까 됬음.
 	}
 
-	public int noticeInsert(Notice notice) {
-		return sqlSession.insert("noticeInsert", notice);
+	public void noticeInsert(Notice notice) {
+		sqlSession.insert("noticeInsert", notice);
 	}
 	
-	/*public void updateViewsCnt(Map<String, Object> map) throws Exception{
-		sqlSession.update("noticeUpdateViewsCnt", map);
-	}*/
-
-
-
-
+//	public void noticeInsertFile(Map<String, Object> map) throws Exception{
+//		sqlSession.insert("noticeInsertFile", map);
+//	}
 	
+	public void noticeDelete(Notice notice) {
+		sqlSession.update("noticeDelete", notice);
+	}
+
+	public void noticeUpdate(Notice notice) {
+		sqlSession.update("noticeUpdate", notice);
+	}
+
+	public int noticeTC(Notice notice) {
+		return  (Integer) sqlSession.selectOne("noticeTC", notice);
+	}
+
+	public List<Notice> brandnewNotice(Notice notice) {
+		return (List<Notice>) sqlSession.selectList("brandnewNotice", notice);
+	}
+
 }

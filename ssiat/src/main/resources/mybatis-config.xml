@@ -6,11 +6,13 @@
 	<typeAliases>
 		<typeAlias type="org.poom.sap.member.model.vo.Member" alias="member" />
 		<typeAlias type="org.poom.sap.notice.model.vo.Notice" alias="notice" />
+		<typeAlias type="org.poom.sap.noriter.model.vo.Noriter" alias="noriter" />
 	</typeAliases>
 	
 	<mappers>
 		<mapper resource="mappers/member-mapper.xml" />
 		<mapper resource="mappers/notice-mapper.xml" />
+		<mapper resource="mappers/noriter-mapper.xml" />
 
 	</mappers>
 </configuration>

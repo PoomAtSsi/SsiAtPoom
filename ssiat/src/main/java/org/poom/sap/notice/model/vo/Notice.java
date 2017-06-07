@@ -2,80 +2,106 @@ package org.poom.sap.notice.model.vo;
 
 import java.sql.Date;
 
+import org.springframework.web.multipart.MultipartFile;
+
 public class Notice implements java.io.Serializable{
-	private int NOTICE_NO;
-	private String NOTICE_NICKNAME;
-	private String NOTICE_TITLE;
-	private String NOTICE_CONTENTS;
-	private String NOTICE_FILE;
-	private Date NOTICE_DATE;
+	private int notice_no;
+	private String notice_nickname;
+	private String notice_title;
+	private String notice_contents;
+	private MultipartFile notice_file;
+	private Date notice_date;
+	private int notice_visibility;
+	private String notice_filepath;
 	
 	public Notice(){}
 	
-	public Notice(int NOTICE_NO, String NOTICE_NICKNAME, String NOTICE_TITLE,
-			String NOTICE_CONTENTS, String NOTICE_FILE, Date NOTICE_DATE) {
+	public Notice(int notice_no, String notice_nickname, String notice_title,
+			String notice_contents, MultipartFile notice_file, Date notice_date, int notice_visibility
+			,String notice_filepath) {
 		super();
-		this.NOTICE_NO = NOTICE_NO;
-		this.NOTICE_NICKNAME = NOTICE_NICKNAME;
-		this.NOTICE_TITLE = NOTICE_TITLE;
-		this.NOTICE_CONTENTS = NOTICE_CONTENTS;
-		this.NOTICE_FILE = NOTICE_FILE;
-		this.NOTICE_DATE = NOTICE_DATE;
+		this.notice_no = notice_no;
+		this.notice_nickname = notice_nickname;
+		this.notice_title = notice_title;
+		this.notice_contents = notice_contents;
+		this.notice_file = notice_file;
+		this.notice_date = notice_date;
+		this.notice_visibility = notice_visibility;
+		this.notice_filepath = notice_filepath;
 	}
 
-	public int getNOTICE_NO() {
-		return NOTICE_NO;
+
+	public int getNotice_no() {
+		return notice_no;
 	}
 
-	public void setNOTICE_NO(int nOTICE_NO) {
-		NOTICE_NO = nOTICE_NO;
+	public void setNotice_no(int notice_no) {
+		this.notice_no = notice_no;
 	}
 
-	public String getNOTICE_NICKNAME() {
-		return NOTICE_NICKNAME;
+	public String getNotice_nickname() {
+		return notice_nickname;
 	}
 
-	public void setNOTICE_NICKNAME(String nOTICE_NICKNAME) {
-		NOTICE_NICKNAME = nOTICE_NICKNAME;
+	public void setNotice_nickname(String notice_nickname) {
+		this.notice_nickname = notice_nickname;
 	}
 
-	public String getNOTICE_TITLE() {
-		return NOTICE_TITLE;
+	public String getNotice_title() {
+		return notice_title;
 	}
 
-	public void setNOTICE_TITLE(String nOTICE_TITLE) {
-		NOTICE_TITLE = nOTICE_TITLE;
+	public void setNotice_title(String notice_title) {
+		this.notice_title = notice_title;
 	}
 
-	public String getNOTICE_CONTENTS() {
-		return NOTICE_CONTENTS;
+	public String getNotice_contents() {
+		return notice_contents;
 	}
 
-	public void setNOTICE_CONTENTS(String nOTICE_CONTENTS) {
-		NOTICE_CONTENTS = nOTICE_CONTENTS;
+	public void setNotice_contents(String notice_contents) {
+		this.notice_contents = notice_contents;
 	}
 
-	public String getNOTICE_FILE() {
-		return NOTICE_FILE;
+	public MultipartFile getNotice_file() {
+		return notice_file;
 	}
 
-	public void setNOTICE_FILE(String nOTICE_FILE) {
-		NOTICE_FILE = nOTICE_FILE;
+	public void setNotice_file(MultipartFile notice_file) {
+		this.notice_file = notice_file;
 	}
 
-	public Date getNOTICE_DATE() {
-		return NOTICE_DATE;
+	public Date getNotice_date() {
+		return notice_date;
 	}
 
-	public void setNOTICE_DATE(Date nOTICE_DATE) {
-		NOTICE_DATE = nOTICE_DATE;
+	public void setNotice_date(Date notice_date) {
+		this.notice_date = notice_date;
+	}
+
+	public int getNotice_visibility() {
+		return notice_visibility;
+	}
+
+	public void setNotice_visibility(int notice_visibility) {
+		this.notice_visibility = notice_visibility;
+	}
+	
+	public String getNotice_filepath() {
+		return notice_filepath;
+	}
+
+	public void setNotice_filepath(String notice_filepath) {
+		this.notice_filepath = notice_filepath;
 	}
 
 	@Override
 	public String toString() {
-		return "Notice [NOTICE_NO=" + NOTICE_NO + ", NOTICE_NICKNAME=" + NOTICE_NICKNAME + ", NOTICE_TITLE="
-				+ NOTICE_TITLE + ", NOTICE_CONTENTS=" + NOTICE_CONTENTS + ", NOTICE_FILE=" + NOTICE_FILE
-				+ ", NOTICE_DATE=" + NOTICE_DATE + "]";
+		return "Notice [notice_no=" + notice_no + ", notice_nickname=" + notice_nickname + ", notice_title="
+				+ notice_title + ", notice_contents=" + notice_contents + ", notice_file=" + notice_file
+				+ ", notice_date=" + notice_date + ", notice_visibility=" + notice_visibility + ", notice_filepath="
+				+ notice_filepath + "]";
 	}
 
+	
 }

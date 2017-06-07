@@ -24,7 +24,7 @@ public class MemberController {
 	@Autowired
 	private MemberService memberService;
 	
-	@RequestMapping(value="/login.do", method = {RequestMethod.GET, RequestMethod.POST})
+	@RequestMapping(value="/login.do", method=RequestMethod.POST)
 	public ModelAndView loginCheck(Member member, ModelAndView mv, HttpSession session){
 		
 		Member loginUser = memberService.loginCheck(member);
@@ -44,27 +44,27 @@ public class MemberController {
 		return "redirect:/";
 	}
 	
-	@RequestMapping("/insert.do")
+	@RequestMapping(value="/insert.do", method=RequestMethod.POST)
 	public ModelAndView memberInsert(){
 		return null;
 	}
 	
-	@RequestMapping("/update.do")
+	@RequestMapping(value="/update.do", method=RequestMethod.POST)
 	public ModelAndView memberUpdate(){
 		return null;
 	}
 	
-	@RequestMapping("/delete.do")
+	@RequestMapping(value="/delete.do", method=RequestMethod.POST)
 	public String memberDelete(){
 		return null;
 	}
 	
-	@RequestMapping("/list.do")
+	@RequestMapping(value="/list.do", method=RequestMethod.GET)
 	public ModelAndView memberList(){
 		return null;
 	}
 	
-	@RequestMapping("/idSearch")
+	@RequestMapping(value="/idSearch", method=RequestMethod.GET)
 	public ModelAndView memberIdSeach(){
 		return null;
 	}
