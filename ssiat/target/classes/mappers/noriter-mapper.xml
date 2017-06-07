@@ -156,8 +156,8 @@
 		]]>
 	</select>
 	
-	<select id="myNoriter">
-		SELECT * FROM SSIATNORITER WHERE N_NICKNAME = #{n_nickname}
+	<select id="myNoriter" resultMap="noriterResult" parameterType="String">
+		SELECT * FROM SSIATNORITER WHERE N_NICKNAME = #{nickname}
 	</select>
 
 </mapper>

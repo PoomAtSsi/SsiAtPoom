@@ -9,7 +9,7 @@
 		<result property="cat_no" column="CAT_NO"/>
 		<result property="g_title" column="G_TITLE" />
 		<result property="g_nickname" column="G_NICKNAME" />
-		<result property="g_category" column="G_CATEGORY" />
+		<result property="category" column="G_CATEGORY" />
 		<result property="g_detail" column="G_DETAIL" />
 		<result property="g_career" column="G_CAREER" />
 		<result property="g_file" column="G_FILE" />
@@ -30,7 +30,74 @@
 	</resultMap>
 	
 	<select id="ggiriList" resultMap="ggiriResult">
-		SELECT * FROM SSIATGGIRI WHERE G_VISIBILITY=0 ORDER BY G_NO DESC
+		<![CDATA[
+		select X.CAT_NO ,
+	      		X.G_NO,
+	      		X.G_TITLE,
+				X.G_NICKNAME,
+				X.G_CATEGORY,
+				X.G_DETAIL,
+				X.G_CAREER,
+				X.G_FILE,
+				X.G_LOCATION,
+	      		X.G_DDAY,
+				X.G_COUNTPPL,
+				X.G_MINPPL,
+				X.G_MAXPPL,
+				X.G_VISIBILITY,
+				X.G_FEE,
+				X.G_LIKE,
+	      		X.G_LX,
+	      		X.G_LY
+			from ( 
+			    select A.CAT_NO,
+					A.G_NO,
+					A.G_TITLE,
+					A.G_NICKNAME,
+					A.G_CATEGORY,
+					A.G_DETAIL,
+					A.G_CAREER,
+					A.G_FILE,
+					A.G_LOCATION,
+					A.G_DDAY,
+					A.G_MINPPL,
+					A.G_MAXPPL,
+					A.G_COUNTPPL,
+					A.G_FEE,
+					A.G_LIKE,
+	        		A.G_VISIBILITY,
+	        		A.G_LX,
+	        		A.G_LY
+			    from (
+			        select B.CATEGORY_ONE,
+			        	C.CAT_NO,
+						C.G_NO,
+						C.G_TITLE,
+						C.G_NICKNAME,
+						C.G_CATEGORY,
+						C.G_DETAIL,
+						C.G_CAREER,
+						C.G_FILE,
+						C.G_LOCATION,
+						C.G_DDAY,
+						C.G_MINPPL,
+						C.G_MAXPPL,
+	          			C.G_COUNTPPL,
+						C.G_FEE,
+						C.G_LIKE,
+						C.G_VISIBILITY,
+	         			C.G_LX,
+	          			C.G_LY
+			        from SSIATGGIRI C, CATEGORY B
+			        where C.G_CATEGORY = B.CATEGORY_NO
+			        order by G_NO) A
+			    where A.G_NO <= #{ end }
+			    AND (A.G_CATEGORY = #{ category }
+			    	OR A.CATEGORY_ONE = #{ category })
+			    ) X
+			where X.G_NO >= #{ start }
+			]]>
+		<!-- SELECT * FROM SSIATGGIRI WHERE G_VISIBILITY=0 ORDER BY G_NO DESC -->
 	</select>
 	
 	<select id="categoryGgiri" resultMap="ggiriResult" parameterType="int">
@@ -129,8 +196,14 @@
 		DELETE FROM SSIATGGIRI_LIKE WHERE G_L_NICKNAME=#{g_l_nickname} AND G_L_NO=#{g_l_no}
 	</delete> 
 	
-	<select id="myGgiri" resultMap="ggiriResult" parameterType="ggiri">
+	<select id="myGgiri" resultMap="ggiriResult" parameterType="String">
 		SELECT * FROM SSIATGGIRI WHERE G_NICKNAME = #{g_nickname}
+	</select>
+	
+	<select id="ggiriTC" resultType="java.lang.Integer">
+		<![CDATA[
+		SELECT count(*) as totalCount from SSIATGGIRI
+		]]>
 	</select>
 
 </mapper>	

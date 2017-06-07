@@ -62,5 +62,9 @@ public class NoriterDao {
 	public int noriterTC(Noriter noriter) {
 		return  (Integer) sqlSession.selectOne("noriterTC", noriter);
 	}
+	
+	public List<Noriter> myNoriter(String nickname){
+		return (List<Noriter>) sqlSession.selectList("myNoriter",nickname);
+	}
 
 }

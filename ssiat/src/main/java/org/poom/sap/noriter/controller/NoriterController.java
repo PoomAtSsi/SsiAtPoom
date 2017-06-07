@@ -171,5 +171,14 @@ public class NoriterController {
 
 		return "testeditor/navereditor2";
 	}
+	
+	/*@RequestMapping(value="/mynoriter.do", method=RequestMethod.GET)
+	public ModelAndView myNoriter(@RequestParam("nickname")Noriter noriter, ModelAndView mv)throws Exception{
+		List<Noriter> mnlist = noriterService.myNoriter(noriter);
+		System.out.println(noriter);
+		mv.addObject("mnlist",mnlist);
+		mv.setViewName("mypage/myssiat");
+		return mv;
+	}*/
 
 }

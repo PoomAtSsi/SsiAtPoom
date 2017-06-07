@@ -1,10 +1,13 @@
 package org.poom.sap.ggiri.model.dao;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.log4j.Logger;
 import org.mybatis.spring.SqlSessionTemplate;
+import org.poom.sap.common.util.Paging;
 import org.poom.sap.ggiri.model.vo.Ggiri;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -19,10 +22,19 @@ public class GgiriDao {
 	public GgiriDao(){}
 
 	@SuppressWarnings("unchecked")
-	public List<Ggiri> ggiriList(Ggiri ggiri) {
-		// TODO Auto-generated method stub
-		log.debug("gdao");
-		return (List<Ggiri>) sqlSession.selectList("ggiriList");
+	public List<Ggiri> ggiriList(Ggiri ggiri,Paging paging, int category) {
+		
+		Map map = new HashMap();
+		int start = ((paging.getPage() -1 ) * 10) + 1;
+		int end = (paging.getPage() * 10);
+		System.out.println("start : " + start);
+		System.out.println("end : " + end);
+		
+		map.put("noriter", ggiri);
+		map.put("start", start);
+		map.put("end", end);
+		map.put("category", category);
+		return (List<Ggiri>) sqlSession.selectList("ggiriList",map);
 	}
 	
 	public List<Ggiri> CategoryGgiri(Ggiri ggiri){
@@ -78,8 +90,12 @@ public class GgiriDao {
 		return (List<Ggiri>) sqlSession.selectList("memberProfile", ggiri);
 	}
 	
-	public ArrayList<Ggiri> myGgiri(Ggiri ggiri){
-		return (ArrayList<Ggiri>) sqlSession.selectList("myGgiri", ggiri);
+	public ArrayList<Ggiri> myGgiri(String g_nickname){
+		return (ArrayList<Ggiri>) sqlSession.selectList("myGgiri", g_nickname);
+	}
+	
+	public int ggiriTC(Ggiri ggiri){
+		return  (Integer) sqlSession.selectOne("ggiriTC", ggiri);
 	}
 
 }

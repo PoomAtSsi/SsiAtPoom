@@ -38,7 +38,14 @@
 		onclick="location.href='itcp/firstInterceptor.do'">인터셉터</button>
 
 	<hr>
-	<button type="button" onclick="location.href='ggiri/gMyGgiri.do?g_nickname=${loginUser.nickname}'">myssiat</button>
+<%-- 	<form action="/sap/ggiri/gMyGgiri.do" method="GET">
+	<input type="hidden" name="g_nickname" value="${loginUser.nickname }"/>
+	<input type="hidden" name="nickname" value="${loginUser.nickname }"/>
+	<button type="submit">myssiat</button>
+	</form> --%>
+	
+	<button type="button" onclick="location.href='ggiri/gMyGgiri.do?g_nickname=${loginUser.nickname}&nickname=${loginUser.nickname}'">myssiat</button>
+	<!-- onclick="location.href='ggiri/gMyGgiri.do' -->
 <%-- 	<hr>
 	<jsp:include page="testvideo.do" />
 	 --%>
@@ -46,7 +53,6 @@
 	
 <%-- 	<hr>
 	<jsp:include page="noriter/navereditor.do" /> --%>
-	
 	
 	
 	<hr>
