@@ -4,4 +4,6 @@ import org.poom.sap.member.model.vo.Member;
 
 public interface MemberService {
 	Member loginCheck(Member vo);
+
+	int insertMember(Member member);
 }

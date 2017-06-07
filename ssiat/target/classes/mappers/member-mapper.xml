@@ -34,5 +34,26 @@
 	<select id="memberProfile" parameterType="member" resultMap="memberResult">
 	SELECT PROFILE FROM MEMBER WHERE NICKNAME = #{g_nickname}
 	</select>
+	
+	<insert id="insertMember">
+	INSERT INTO MEMBER 
+		VALUES(
+			DEFAULT,
+			#{email},
+			#{username},
+			#{nickname},
+			#{password},
+			#{mobile},
+			DEFAULT,
+			#{file,jdbcType=VARCHAR},
+			#{gender,jdbcType=CHAR},
+			#{birth},
+			#{introduce,jdbcType=VARCHAR},
+			#{career,jdbcType=VARCHAR},
+			#{email_agree},
+			0,
+			1
+		)
+	</insert>
 
 </mapper>

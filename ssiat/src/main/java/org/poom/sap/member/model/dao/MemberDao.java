@@ -20,5 +20,9 @@ public class MemberDao {
 	public Member selectLogin(Member loginVo) {
 		return (Member) sqlSession.selectOne("loginSelect", loginVo);
 	}
+
+	public int insertMember(Member member) {
+		return sqlSession.insert("insertMember", member);
+	}
 	
 }

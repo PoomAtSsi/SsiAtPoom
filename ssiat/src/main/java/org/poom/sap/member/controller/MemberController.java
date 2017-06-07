@@ -44,9 +44,16 @@ public class MemberController {
 		return "redirect:/";
 	}
 	
-	@RequestMapping(value="/insert.do", method=RequestMethod.POST)
-	public ModelAndView memberInsert(){
-		return null;
+	@RequestMapping(value="/insert.do", method=RequestMethod.GET)
+	public String memberInsert(){
+		return "member/insertForm";
+	}
+	
+	@RequestMapping(value="/minsert.do", method=RequestMethod.POST)
+	public ModelAndView memberInsert(Member member, ModelAndView mav){
+		int insertMember = memberService.insertMember(member);
+		mav.setViewName("home");
+		return mav;
 	}
 	
 	@RequestMapping(value="/update.do", method=RequestMethod.POST)
